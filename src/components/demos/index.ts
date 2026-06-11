@@ -11,4 +11,5 @@ export const demoLoaders: Record<string, DemoLoader | undefined> = {
   aivently: () => import("./AiventlyDemo"),
   workout: () => import("./WorkoutDemo"),
   watchtogether: () => import("./SyncRoomDemo"),
+  lastfort: () => import("./FortDemo"),
 };
