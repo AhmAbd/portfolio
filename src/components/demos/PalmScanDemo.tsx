@@ -110,7 +110,7 @@ export default function PalmScanDemo() {
 
       {/* readout */}
       <div>
-        <div className="flex items-baseline gap-3">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="font-mono text-xs text-faint">similarity</span>
           <span className={`display text-4xl sm:text-5xl ${phase === "granted" ? "text-acc" : "text-ink"}`}>
             {score.toFixed(3)}

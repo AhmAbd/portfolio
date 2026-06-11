@@ -146,6 +146,7 @@ export default function GestureDemo() {
               {HAND_CONNECTIONS.map(([a, b], i) => (
                 <motion.line
                   key={`c-${i}`}
+                  initial={false}
                   animate={{
                     x1: points[a][0],
                     y1: points[a][1],
@@ -161,6 +162,7 @@ export default function GestureDemo() {
               {points.map((_, i) => (
                 <motion.circle
                   key={`p-${i}`}
+                  initial={false}
                   animate={{ cx: points[i][0], cy: points[i][1] }}
                   transition={{ duration: reduced ? 0 : 0.3, ease: "easeOut" }}
                   r="1.2"

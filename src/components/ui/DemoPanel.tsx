@@ -18,6 +18,7 @@ export function DemoPanel({ id, demo }: DemoPanelProps) {
   const [procMs, setProcMs] = useState("0.0");
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const wasOpenRef = useRef(false);
 
   const loader = demoLoaders[id];
 
@@ -39,12 +40,19 @@ export function DemoPanel({ id, demo }: DemoPanelProps) {
 
   const close = useCallback(() => {
     setState("closed");
-    toggleRef.current?.focus();
   }, []);
 
-  // focus moves into the panel once content is up
+  // focus moves into the panel once content is up, and back to the
+  // re-mounted run_demo button after close (ref is null until remount)
   useEffect(() => {
-    if (state === "open") panelRef.current?.focus();
+    if (state === "open") {
+      wasOpenRef.current = true;
+      panelRef.current?.focus();
+    }
+    if (state === "closed" && wasOpenRef.current) {
+      wasOpenRef.current = false;
+      toggleRef.current?.focus();
+    }
   }, [state]);
 
   if (!loader) return null;
