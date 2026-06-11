@@ -6,4 +6,5 @@ export type DemoLoader = () => Promise<{ default: ComponentType }>;
 export const demoLoaders: Record<string, DemoLoader | undefined> = {
   recycling: () => import("./WasteGameDemo"),
   palmprint: () => import("./PalmScanDemo"),
+  gestureflow: () => import("./GestureDemo"),
 };
