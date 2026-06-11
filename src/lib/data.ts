@@ -12,6 +12,8 @@ export interface Detection {
   /** headline stat rendered as the detection score */
   metric: { value: string; caption: string };
   confidence: number;
+  /** inline runnable demo — label = panel header tag, caption = dry one-liner */
+  demo?: { label: string; caption: string };
 }
 
 export interface SkillClass {
@@ -64,6 +66,7 @@ export const detections: Detection[] = [
     tech: ["Next.js", "Firebase", "OpenAI Whisper", "FFmpeg", "GCP TTS/STT", "ONNX"],
     metric: { value: "500+", caption: "registered users, paid revenue" },
     confidence: 0.99,
+    demo: { label: "pipeline_run", caption: "subtitles typed by the pipeline, not by hand · refresh resets credits" },
   },
   {
     id: "palmprint",
@@ -81,6 +84,7 @@ export const detections: Detection[] = [
     tech: ["PyTorch", "OpenCV", "ESP32-S3", "FastAPI"],
     metric: { value: "90%", caption: "real-world accuracy, 20-person dataset" },
     confidence: 0.95,
+    demo: { label: "palm_scan", caption: "contactless — except for your mouse." },
   },
   {
     id: "recycling",
@@ -98,6 +102,7 @@ export const detections: Detection[] = [
     tech: ["YOLOv8", "React Native", "FastAPI", "Docker", "ONNX"],
     metric: { value: "86.29%", caption: "test mAP50, best of 4 architectures" },
     confidence: 0.86,
+    demo: { label: "waste_sort", caption: "same five classes as the real app · keys 1–5 work too" },
   },
   {
     id: "gestureflow",
@@ -115,6 +120,7 @@ export const detections: Detection[] = [
     tech: ["TypeScript", "MediaPipe", "Chrome MV3"],
     metric: { value: "0", caption: "frames sent to a server" },
     confidence: 0.93,
+    demo: { label: "gesture_ctl", caption: "0 frames leave this page — there is no camera." },
   },
   {
     id: "workout",
@@ -132,6 +138,7 @@ export const detections: Detection[] = [
     tech: ["React Native", "Expo", "OpenAI", "SQLite"],
     metric: { value: "100%", caption: "of plans schema-validated before saving" },
     confidence: 0.94,
+    demo: { label: "plan_gen", caption: "100% of plans schema-validated — eventually." },
   },
   {
     id: "triage",
@@ -149,6 +156,7 @@ export const detections: Detection[] = [
     tech: ["Python", "scikit-fuzzy", "Next.js"],
     metric: { value: "243/243", caption: "input combinations covered" },
     confidence: 0.97,
+    demo: { label: "fuzzy_queue", caption: "ranked by logic, not luck — drag yourself critical." },
   },
   {
     id: "watchtogether",
@@ -166,6 +174,7 @@ export const detections: Detection[] = [
     tech: ["Next.js", "Socket.IO", "WebRTC", "Firebase", "Railway"],
     metric: { value: "~0s", caption: "playback drift between viewers" },
     confidence: 0.92,
+    demo: { label: "sync_room", caption: "~0s drift — omar's hotel wifi notwithstanding." },
   },
   {
     id: "lastfort",
@@ -183,6 +192,7 @@ export const detections: Detection[] = [
     tech: ["Unity", "C#", "NavMesh", "URP"],
     metric: { value: "∞", caption: "waves, difficulty permitting" },
     confidence: 0.9,
+    demo: { label: "hold_the_line", caption: "wave 6+ exists. difficulty permitting." },
   },
 ];
 

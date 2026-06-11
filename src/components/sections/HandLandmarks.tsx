@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 
 /** MediaPipe hand topology: 21 landmarks, real connection graph. A nod to the palmprint work. */
-const points: ReadonlyArray<readonly [number, number]> = [
+export const HAND_POINTS: ReadonlyArray<readonly [number, number]> = [
   [50, 95], // 0 wrist
   [38, 85], [28, 74], [21, 64], [16, 55], // thumb
   [38, 62], [35, 46], [33, 35], [32, 25], // index
@@ -12,7 +12,7 @@ const points: ReadonlyArray<readonly [number, number]> = [
   [68, 66], [72, 52], [74, 43], [76, 34], // pinky
 ];
 
-const connections: ReadonlyArray<readonly [number, number]> = [
+export const HAND_CONNECTIONS: ReadonlyArray<readonly [number, number]> = [
   [0, 1], [1, 2], [2, 3], [3, 4],
   [0, 5], [5, 6], [6, 7], [7, 8],
   [5, 9], [9, 10], [10, 11], [11, 12],
@@ -33,13 +33,13 @@ export function HandLandmarks({ className = "" }: { className?: string }) {
       animate={{ opacity: 1 }}
       transition={{ duration: reduced ? 0 : 1.4, delay: reduced ? 0 : 1.2 }}
     >
-      {connections.map(([a, b], i) => (
+      {HAND_CONNECTIONS.map(([a, b], i) => (
         <motion.line
           key={`c-${i}`}
-          x1={points[a][0]}
-          y1={points[a][1]}
-          x2={points[b][0]}
-          y2={points[b][1]}
+          x1={HAND_POINTS[a][0]}
+          y1={HAND_POINTS[a][1]}
+          x2={HAND_POINTS[b][0]}
+          y2={HAND_POINTS[b][1]}
           stroke="var(--acc)"
           strokeOpacity="0.28"
           strokeWidth="0.5"
@@ -48,7 +48,7 @@ export function HandLandmarks({ className = "" }: { className?: string }) {
           transition={{ duration: reduced ? 0 : 0.5, delay: reduced ? 0 : 1.3 + i * 0.045 }}
         />
       ))}
-      {points.map(([x, y], i) => (
+      {HAND_POINTS.map(([x, y], i) => (
         <motion.circle
           key={`p-${i}`}
           cx={x}
