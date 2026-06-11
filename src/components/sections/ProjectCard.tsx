@@ -1,5 +1,6 @@
 import type { Detection } from "@/lib/data";
 import { BoundingBox } from "@/components/ui/BoundingBox";
+import { DemoPanel } from "@/components/ui/DemoPanel";
 import { Reveal } from "@/components/ui/Reveal";
 import { TechChip } from "@/components/ui/TechChip";
 
@@ -51,6 +52,12 @@ export function ProjectCard({ detection, index }: ProjectCardProps) {
             </ul>
           </Reveal>
         </div>
+
+        {detection.demo && (
+          <div className="lg:order-3 lg:col-span-12">
+            <DemoPanel id={detection.id} demo={detection.demo} />
+          </div>
+        )}
       </article>
     </BoundingBox>
   );
