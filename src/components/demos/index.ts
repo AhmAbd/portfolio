@@ -9,4 +9,5 @@ export const demoLoaders: Record<string, DemoLoader | undefined> = {
   gestureflow: () => import("./GestureDemo"),
   triage: () => import("./TriageDemo"),
   aivently: () => import("./AiventlyDemo"),
+  workout: () => import("./WorkoutDemo"),
 };
