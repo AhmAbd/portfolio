@@ -7,4 +7,5 @@ export const demoLoaders: Record<string, DemoLoader | undefined> = {
   recycling: () => import("./WasteGameDemo"),
   palmprint: () => import("./PalmScanDemo"),
   gestureflow: () => import("./GestureDemo"),
+  triage: () => import("./TriageDemo"),
 };
