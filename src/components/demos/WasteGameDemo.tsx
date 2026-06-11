@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal } from "@/components/ui/Reveal";
 
 type BinId = "glass" | "paper" | "metal" | "battery" | "plastic";
 
@@ -70,7 +68,7 @@ function readBest(): number | null {
   }
 }
 
-export function WasteGame() {
+export default function WasteGameDemo() {
   const reduced = useReducedMotion();
   const roundMs = reduced ? 5200 : 3600;
 
@@ -183,122 +181,104 @@ export function WasteGame() {
   const playing = phase === "item" || phase === "feedback";
 
   return (
-    <section
-      id="playground"
-      aria-labelledby="playground-title"
-      className="mx-auto max-w-6xl px-5 sm:px-8"
-      style={{ paddingBlock: "var(--space-section)" }}
-    >
-      <SectionHeading
-        index="04"
-        tag="playground"
-        title="Beat my model"
-        meta={`benchmark: ${BENCHMARK}%`}
-      />
+    <div>
+      <p className="mb-5 max-w-xl text-sm leading-relaxed text-mut">
+        My YOLOv8s sorts waste at <span className="text-ink">{BENCHMARK}% mAP50</span>.
+        Your turn: {ROUNDS} items, a few seconds each, five bins. Beat the model.
+      </p>
 
-      <Reveal>
-        <p className="mb-8 max-w-xl leading-relaxed text-mut">
-          My YOLOv8s sorts waste at <span className="text-ink">86.29% mAP50</span>. Your turn:{" "}
-          {ROUNDS} items, a few seconds each, five bins. Outsort the model.
-        </p>
-
-        <div
-          className={`relative border bg-bg-card/40 transition-colors duration-300 ${
-            feedback ? (feedback.ok ? "border-acc" : "border-warn") : "border-line"
-          }`}
-        >
-          {/* status bar */}
-          <div className="flex items-center justify-between border-b border-line px-4 py-2.5 font-mono text-[11px] text-faint sm:px-5 sm:text-xs">
-            <span>
-              {playing ? `item ${String(round + 1).padStart(2, "0")}/${ROUNDS}` : `items: ${ROUNDS}`}
-            </span>
-            <span aria-live="polite">
-              {playing
-                ? `acc: ${round > 0 || phase === "feedback" ? ((correct / Math.max(round + (phase === "feedback" ? 1 : 0), 1)) * 100).toFixed(0) : "—"}%`
-                : best !== null
-                  ? `personal_best: ${best.toFixed(2)}%`
-                  : "personal_best: none"}
-            </span>
-          </div>
-
-          {/* arena */}
-          <div className="dotgrid flex min-h-64 flex-col items-center justify-center px-4 py-10 text-center sm:min-h-72">
-            {phase === "idle" && (
-              <button
-                onClick={start}
-                className="group inline-flex items-center gap-3 bg-acc px-6 py-3.5 font-mono text-sm font-medium text-bg transition-transform duration-200 hover:-translate-y-0.5"
-              >
-                start_run
-                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </button>
-            )}
-
-            {playing && item && (
-              <>
-                <div className="text-6xl sm:text-7xl" aria-hidden="true">
-                  {item.emoji}
-                </div>
-                <p className="mt-4 font-mono text-sm text-ink sm:text-base">{item.name}</p>
-                <p
-                  className={`mt-3 h-5 font-mono text-[13px] ${feedback ? (feedback.ok ? "text-acc" : "text-warn") : "text-transparent"}`}
-                  aria-live="assertive"
-                >
-                  {feedback?.message ?? "·"}
-                </p>
-              </>
-            )}
-
-            {phase === "done" && (
-              <div>
-                <p className="font-mono text-xs text-faint">final_accuracy</p>
-                <p className={`display mt-2 text-6xl sm:text-7xl ${won ? "text-acc" : "text-warn"}`}>
-                  {accuracy.toFixed(2)}%
-                </p>
-                <p className="mt-3 font-mono text-sm text-mut">
-                  {won
-                    ? "New SOTA. Publish it."
-                    : `The model remains undefeated. (${BENCHMARK}%)`}
-                </p>
-                <button
-                  onClick={start}
-                  className="link-hud mt-6 font-mono text-sm text-ink"
-                >
-                  retry_run →
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* round timer */}
-          {playing && (
-            <div className="h-0.5 w-full bg-line" aria-hidden="true">
-              <div
-                className="h-full origin-left bg-acc"
-                style={{ transform: `scaleX(${phase === "feedback" ? 0 : 1 - progress})` }}
-              />
-            </div>
-          )}
-
-          {/* bins */}
-          <div className="flex flex-wrap justify-center gap-2 border-t border-line px-4 py-4 sm:gap-3 sm:px-5">
-            {BINS.map((bin, i) => (
-              <button
-                key={bin.id}
-                onClick={() => answer(bin.id)}
-                disabled={phase !== "item"}
-                className="border border-line px-3 py-2 font-mono text-xs text-mut transition-colors duration-150 hover:border-acc hover:text-acc disabled:opacity-45 disabled:hover:border-line disabled:hover:text-mut sm:px-4 sm:text-[13px]"
-              >
-                <span className="mr-1.5 text-faint" aria-hidden="true">{i + 1}</span>
-                {bin.label}
-              </button>
-            ))}
-          </div>
+      <div
+        className={`relative border bg-bg-card/40 transition-colors duration-300 ${
+          feedback ? (feedback.ok ? "border-acc" : "border-warn") : "border-line"
+        }`}
+      >
+        {/* status bar */}
+        <div className="flex items-center justify-between border-b border-line px-4 py-2.5 font-mono text-[11px] text-faint sm:px-5 sm:text-xs">
+          <span>
+            {playing ? `item ${String(round + 1).padStart(2, "0")}/${ROUNDS}` : `items: ${ROUNDS}`}
+          </span>
+          <span aria-live="polite">
+            {playing
+              ? `acc: ${round > 0 || phase === "feedback" ? ((correct / Math.max(round + (phase === "feedback" ? 1 : 0), 1)) * 100).toFixed(0) : "—"}%`
+              : best !== null
+                ? `personal_best: ${best.toFixed(2)}%`
+                : "personal_best: none"}
+          </span>
         </div>
 
-        <p className="mt-4 font-mono text-xs text-faint">
-          same five classes as the real app · keys 1–5 work too
-        </p>
-      </Reveal>
-    </section>
+        {/* arena */}
+        <div className="dotgrid flex min-h-64 flex-col items-center justify-center px-4 py-10 text-center sm:min-h-72">
+          {phase === "idle" && (
+            <button
+              onClick={start}
+              className="group inline-flex items-center gap-3 bg-acc px-6 py-3.5 font-mono text-sm font-medium text-bg transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              start_run
+              <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </button>
+          )}
+
+          {playing && item && (
+            <>
+              <div className="text-6xl sm:text-7xl" aria-hidden="true">
+                {item.emoji}
+              </div>
+              <p className="mt-4 font-mono text-sm text-ink sm:text-base">{item.name}</p>
+              <p
+                className={`mt-3 h-5 font-mono text-[13px] ${feedback ? (feedback.ok ? "text-acc" : "text-warn") : "text-transparent"}`}
+                aria-live="assertive"
+              >
+                {feedback?.message ?? "·"}
+              </p>
+            </>
+          )}
+
+          {phase === "done" && (
+            <div>
+              <p className="font-mono text-xs text-faint">final_accuracy</p>
+              <p className={`display mt-2 text-6xl sm:text-7xl ${won ? "text-acc" : "text-warn"}`}>
+                {accuracy.toFixed(2)}%
+              </p>
+              <p className="mt-3 font-mono text-sm text-mut">
+                {won
+                  ? "New SOTA. Publish it."
+                  : `The model remains undefeated. (${BENCHMARK}%)`}
+              </p>
+              <button
+                onClick={start}
+                className="link-hud mt-6 font-mono text-sm text-ink"
+              >
+                retry_run →
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* round timer */}
+        {playing && (
+          <div className="h-0.5 w-full bg-line" aria-hidden="true">
+            <div
+              className="h-full origin-left bg-acc"
+              style={{ transform: `scaleX(${phase === "feedback" ? 0 : 1 - progress})` }}
+            />
+          </div>
+        )}
+
+        {/* bins */}
+        <div className="flex flex-wrap justify-center gap-2 border-t border-line px-4 py-4 sm:gap-3 sm:px-5">
+          {BINS.map((bin, i) => (
+            <button
+              key={bin.id}
+              onClick={() => answer(bin.id)}
+              disabled={phase !== "item"}
+              className="border border-line px-3 py-2 font-mono text-xs text-mut transition-colors duration-150 hover:border-acc hover:text-acc disabled:opacity-45 disabled:hover:border-line disabled:hover:text-mut sm:px-4 sm:text-[13px]"
+            >
+              <span className="mr-1.5 text-faint" aria-hidden="true">{i + 1}</span>
+              {bin.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

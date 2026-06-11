@@ -3,7 +3,6 @@
 const links = [
   { href: "#builds", label: "builds" },
   { href: "#feed", label: "commits" },
-  { href: "#playground", label: "playground" },
   { href: "#taxonomy", label: "skills" },
   { href: "#contact", label: "contact" },
 ] as const;

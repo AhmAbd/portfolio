@@ -11,7 +11,7 @@ export function Experience() {
       style={{ paddingBlock: "var(--space-section)" }}
     >
       <SectionHeading
-        index="06"
+        index="05"
         tag="deployment_history"
         title="Runs in production"
         meta="env: real world"

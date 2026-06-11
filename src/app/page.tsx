@@ -5,7 +5,6 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
 import { ContributionGraph } from "@/components/sections/ContributionGraph";
-import { WasteGame } from "@/components/sections/WasteGame";
 import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
@@ -21,7 +20,6 @@ export default function Home() {
         <About />
         <Projects />
         <ContributionGraph />
-        <WasteGame />
         <Skills />
         <Experience />
       </main>

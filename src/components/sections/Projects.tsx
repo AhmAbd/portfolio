@@ -14,7 +14,7 @@ export function Projects() {
         index="02"
         tag="build_log"
         title="Eight things that run"
-        meta="sort: impact · skipped: 0"
+        meta="sort: impact · runnable: 8/8"
       />
 
       <div className="flex flex-col gap-20 sm:gap-24">

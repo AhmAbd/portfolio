@@ -10,7 +10,7 @@ export function Contact() {
         className="mx-auto max-w-6xl px-5 sm:px-8"
         style={{ paddingBlock: "var(--space-section)" }}
       >
-        <TypedLabel text="// 07 · handshake" className="mb-6 block text-xs text-acc sm:text-sm" />
+        <TypedLabel text="// 06 · handshake" className="mb-6 block text-xs text-acc sm:text-sm" />
 
         <Reveal>
           <h2

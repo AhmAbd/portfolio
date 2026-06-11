@@ -20,7 +20,7 @@ export function Skills() {
       style={{ paddingBlock: "var(--space-section)" }}
     >
       <SectionHeading
-        index="05"
+        index="04"
         tag="stack_manifest"
         title="Trained on"
         meta={`modules: ${skillClasses.length}`}
