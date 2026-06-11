@@ -8,4 +8,5 @@ export const demoLoaders: Record<string, DemoLoader | undefined> = {
   palmprint: () => import("./PalmScanDemo"),
   gestureflow: () => import("./GestureDemo"),
   triage: () => import("./TriageDemo"),
+  aivently: () => import("./AiventlyDemo"),
 };
